@@ -13,3 +13,9 @@ docker compose up
 
 ## For deployment to a Kubernates production environment.
 We can write a deployment file for kubernates with a Service and loadbalancer while exposing the deticated application port, and writing a deployment app for the container image build with docker compose and assiging the replica set for the app to run on production
+
+### Screen Shoots
+
+![alt text](./blob-service.png)
+
+![alt text](./worker-service.png)
