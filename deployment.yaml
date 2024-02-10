@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blob-worker
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: blob-worker
+  template:
+    metadata:
+      labels:
+        app: blob-worker
+    spec:
+      containers:
+        - name: blob-service
+          image: blob-service/v1
+          ports:
+            - containerPort: 3001
+          imagePullPolicy: Always
+        - name: worker-service
+          image: worker-service/v1
+          ports:
+            - containerPort: 3000
+          imagePullPolicy: Always

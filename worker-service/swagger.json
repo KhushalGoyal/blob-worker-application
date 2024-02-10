@@ -1,0 +1,107 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Swagger for worker service",
+        "version": "1.0.0"
+    },
+    "schemes": [
+        "http"
+    ],
+    "components": {
+        "securitySchemes": {
+            "Bearer": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header",
+                "description": ">-Enter the token with the `Bearer: ` prefix, e.g. 'Bearer abcde12345'"
+            }
+        }
+    },
+    "servers": [{
+        "url": "http://localhost:3000/"
+    }],
+    "paths": {
+        "/api/v1/job/{id}/status": {
+            "get": {
+                "tags": [
+                    "Worker"
+                ],
+                "summary": "Get Details of Worker Job",
+                "description": "Get Details of Worker Job",
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description": "Job uuid id",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
+        },
+        "/api/v1/job": {
+            "post": {
+                "tags": [
+                    "Worker"
+                ],
+                "summary": "Create Worker Job",
+                "description": "Create Worker Job",
+                "requestBody": {
+                    "description": "Request body",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "blobId": {
+                                        "type": "string"
+                                    },
+                                    "payloadLocation": {
+                                        "type": "string"
+                                    },
+                                    "payloadSize": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
+        }
+    }
+}

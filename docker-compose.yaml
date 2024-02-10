@@ -1,0 +1,12 @@
+name: microservice
+services:
+    web:
+      build: ./blob-service/.
+      image: blob-service/v1
+      ports:
+          - 3001:3001
+    web2:
+      build: ./worker-service/.
+      image: worker-service/v1
+      ports:
+          - 3000:3000

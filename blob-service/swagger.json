@@ -1,0 +1,101 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Swagger for blob service",
+        "version": "1.0.0"
+    },
+    "schemes": [
+        "http"
+    ],
+    "components": {
+        "securitySchemes": {
+            "Bearer": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header",
+                "description": ">-Enter the token with the `Bearer: ` prefix, e.g. 'Bearer abcde12345'"
+            }
+        }
+    },
+    "servers": [{
+        "url": "http://localhost:3001/"
+    }],
+    "paths": {
+        "/api/v1/blob/{id}": {
+            "get": {
+                "tags": [
+                    "Blob"
+                ],
+                "summary": "Get Details of Blob",
+                "description": "Get Details of Blob",
+                "parameters": [{
+                    "name": "id",
+                    "in": "path",
+                    "description":  "uuid id",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
+        },
+        "/api/v1/blob": {
+            "post": {
+                "tags": [
+                    "Blob"
+                ],
+                "summary": "Upload Blob",
+                "description": "Upload Blob",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "security": [{
+                    "Bearer": []
+                }]
+            }
+        }
+    }
+}
